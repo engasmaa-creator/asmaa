@@ -203,146 +203,61 @@
         <p>© 2026 مُـصْـطَـفـى - جميع الحقوق محفوظة</p>
     </footer>
 
-    <script>
-        // مصفوفة المنتجات كاملة كما طلبتِ
+        <script>
         let items = [
-            
-            { id: 4, name: "بلوزة كتان بيج ناعمة", price: 420, cat: "womens", img: "images/m.webp" },
-            { id: 5, name: "فستان صيفي راقٍ", price: 1790, cat: "womens", img: "images/asmaa.avif" },
-            { id: 6, name: "كارديجان خريفي أخضر", price: 550, cat: "womens", img: "images/9f6853c39cb54aa4dd038e9a0e028f3b_69a5ecf9543d.avif" },
-            { id: 1, name: "قميص كتان ترابي", price: 450, cat: "mens", img: "images/851c16f2b877fbfff8162b4913d13812_c96f265cb0be.avif" },
-            { id: 2, name: "تيشيرت قطن خالص", price: 320, cat: "mens", img: "images/10a196e40fbcb7d093efa87b4988c9d3_ed2e333ed96e.avif" },
-            { id: 3, name: "جاكيت خريفي أسود", price: 850, cat: "mens", img: "images/6a045d8a27c8e14bb2edfa4d49eaef73_fd24d35e9905.avif" },
-            { id: 7, name: "حذاء رياضي بني", price: 600, cat: "shoes", img: "images/1.jpg" },
-            { id: 8, name: "حذاء جلد مريح", price: 680, cat: "shoes", img: "images/f152c51f-0628-4324-a16c-fde3fb240d4a.avif" },
-            { id: 9, name: "سنيكرز عصري", price: 550, cat: "shoes", img: "images/P01015226.avif" },
-            { id: 10, name: "عرض التوفير (طقم كامل)", price: 900, oldPrice: 1300, cat: "offers", img: "images/2e902d3c7d8b49d1a3b077d9743acde7-goods.avif" },
-            { id: 11, name: "سويت شيرت قطعتين", price: 500, oldPrice: 700, cat: "offers", img: "images/e6973363ef6e3fd1fdfdf9d9e52de2f4_bbe4e88fe33c.avif" },
-            { id: 12, name: "حزام جلد طبيعي", price: 650, oldPrice: 1000, cat: "offers", img: "images/611BH-aLHmL._AC_SX679_.jpg" }
+            { id: 4, name: "بلوزة كتان بيج ناعمة", price: 420, cat: "womens", img: "m.webp" },
+            { id: 5, name: "فستان صيفي راقٍ", price: 1790, cat: "womens", img: "asmaa.avif" },
+            { id: 6, name: "كارديجان خريفي أخضر", price: 550, cat: "womens", img: "9f6853c39cb54aa4dd038e9a0e028f3b_69a5ecf9543d.avif" },
+            { id: 1, name: "قميص كتان ترابي", price: 450, cat: "mens", img: "851c16f2b877fbfff8162b4913d13812_c96f265cb0be.avif" },
+            { id: 2, name: "تيشيرت قطن خالص", price: 320, cat: "mens", img: "10a196e40fbcb7d093efa87b4988c9d3_ed2e333ed96e.avif" },
+            { id: 3, name: "جاكيت خريفي أسود", price: 850, cat: "mens", img: "6a045d8a27c8e14bb2edfa4d49eaef73_fd24d35e9905.avif" },
+            { id: 7, name: "حذاء رياضي بني", price: 600, cat: "shoes", img: "1.jpg" },
+            { id: 8, name: "حذاء جلد مريح", price: 680, cat: "shoes", img: "f152c51f-0628-4324-a16c-fde3fb240d4a.avif" },
+            { id: 9, name: "سنيكرز عصري", price: 550, cat: "shoes", img: "P01015226.avif" },
+            { id: 10, name: "عرض التوفير (طقم كامل)", price: 900, oldPrice: 1300, cat: "offers", img: "2e902d3c7d8b49d1a3b077d9743acde7-goods.avif" },
+            { id: 11, name: "سويت شيرت قطعتين", price: 500, oldPrice: 700, cat: "offers", img: "e6973363ef6e3fd1fdfdf9d9e52de2f4_bbe4e88fe33c.avif" },
+            { id: 12, name: "حزام جلد طبيعي", price: 650, oldPrice: 1000, cat: "offers", img: "611BH-aLHmL._AC_SX679_.jpg" }
         ];
 
         let cart = [];
-        function updateCartUI() {
-            // تحديث العدادات في الهيدر وفي السلة الجانبية
-            document.getElementById('cart-num').innerText = cart.length;
-            document.getElementById('cart-drawer-count').innerText = cart.length;
-            
-            const list = document.getElementById('cart-items-list');
-            
-            // التحقق من حالة السلة
-            if(cart.length === 0) {
-                document.getElementById('empty-msg').style.display = 'block';
-                list.innerHTML = '';
-                document.getElementById('total-price').innerText = '0 جنيه';
-                return;
-            }
-            
-            document.getElementById('empty-msg').style.display = 'none';
 
-            // التعديل الجوهري هنا: استخدام map لإنشاء قائمة بكل المنتجات المختارة
+        function updateCartUI() {
+            document.getElementById('cart-num').innerText = cart.length;
+            const list = document.getElementById('cart-items-list');
             list.innerHTML = cart.map((item, index) => `
                 <div class="cart-item">
-                    <img src="${item.img}" onerror="this.src='https://via.placeholder.com/60x60'">
-                    <div class="cart-item-details">
-                        <h4>${item.name}</h4>
-                        <span style="color:var(--primary-color); font-weight:bold;">${item.price} جنيه</span>
-                    </div>
-                    <i class="fas fa-trash" style="color:#c97a7a; cursor:pointer" onclick="removeFromCart(${index})"></i>
+                    <img src="${item.img}">
+                    <div><h4>${item.name}</h4><p>${item.price} ج</p></div>
+                    <i class="fas fa-trash" onclick="removeFromCart(${index})" style="cursor:pointer"></i>
                 </div>
-            `).join(''); // join تمنع ظهور فاصلة بين المنتجات
-            
-            // حساب الإجمالي لكل المنتجات الموجودة في المصفوفة
+            `).join('');
             let total = cart.reduce((sum, i) => sum + Number(i.price), 0);
             document.getElementById('total-price').innerText = total + ' جنيه';
         }
 
         function renderAll() {
-            const cats = ['womens', 'mens', 'shoes', 'offers'];
-            cats.forEach(cat => {
+            ['womens', 'mens', 'shoes', 'offers'].forEach(cat => {
                 const grid = document.getElementById(`${cat}-grid`);
-                const filtered = items.filter(i => i.cat === cat);
-                grid.innerHTML = filtered.map(item => `
+                grid.innerHTML = items.filter(i => i.cat === cat).map(item => `
                     <div class="product-card">
-                        <img src="${item.img}" class="product-img" onerror="this.src='https://via.placeholder.com/300x400'">
+                        <img src="${item.img}" class="product-img">
                         <h3>${item.name}</h3>
-                        <span class="price">${item.price} جنيه ${item.oldPrice ? `<small class="old-price">${item.oldPrice} ج</small>` : ''}</span>
-                        <button class="buy-btn" onclick="addToCart(${item.id})">+ أضف للسلة</button>
+                        <p>${item.price} جنيه</p>
+                        <button class="buy-btn" onclick="addToCart(${item.id})">أضف للسلة</button>
                     </div>
                 `).join('');
             });
         }
 
-        function addToCart(id) {
-            const product = items.find(i => i.id === id);
-            cart.push(product);
-            updateCartUI();
-            document.getElementById('cart-sidebar').classList.add('open');
-        }
-
-        function updateCartUI() {
-            document.getElementById('cart-num').innerText = cart.length;
-            document.getElementById('cart-drawer-count').innerText = cart.length;
-            const list = document.getElementById('cart-items-list');
-            
-            if(cart.length === 0) {
-                document.getElementById('empty-msg').style.display = 'block';
-                list.innerHTML = '';
-                document.getElementById('total-price').innerText = '0 جنيه';
-                return;
-            }
-            
-            document.getElementById('empty-msg').style.display = 'none';
-            list.innerHTML = cart.map((item, index) => `
-                <div class="cart-item">
-                    <img src="${item.img}">
-                    <div class="cart-item-details">
-                        <h4>${item.name}</h4>
-                        <span style="color:var(--primary-color)">${item.price} جنيه</span>
-                    </div>
-                    <i class="fas fa-trash" style="color:#c97a7a; cursor:pointer" onclick="removeFromCart(${index})"></i>
-                </div>
-            `).join('');
-            
-            let total = cart.reduce((sum, i) => sum + Number(i.price), 0);
-            document.getElementById('total-price').innerText = total + ' جنيه';
-        }
-
+        function addToCart(id) { cart.push(items.find(i => i.id === id)); updateCartUI(); document.getElementById('cart-sidebar').classList.add('open'); }
         function removeFromCart(index) { cart.splice(index, 1); updateCartUI(); }
         function toggleCart() { document.getElementById('cart-sidebar').classList.toggle('open'); }
-
-        function addItem() {
-            const n = document.getElementById('new-name').value;
-            const p = document.getElementById('new-price').value;
-            const c = document.getElementById('new-category').value;
-            const img = document.getElementById('new-img').value || "images/m.webp";
-
-            if(n && p) {
-                items.push({ id: Date.now(), name: n, price: Number(p), cat: c, img: img });
-                renderAll();
-                alert("تمت إضافة المنتج!");
-            }
-        }
-
-        function checkout(method) {
-            if(cart.length === 0) return alert("السلة فارغة!");
-            let total = cart.reduce((sum, i) => sum + Number(i.price), 0);
-            let text = `طلب جديد:%0A`;
-            cart.forEach(i => text += `- ${i.name} (${i.price}ج)%0A`);
-            text += `%0Aالإجمالي: ${total} جنيه%0Aالدفع: ${method}`;
-            
-            if(method === 'فيزا') alert("جاري التحويل لبوابة الدفع...");
-            else window.open(`https://wa.me/201033181443?text=${text}`, '_blank');
-        }
-
-        // Dark Mode
-        document.getElementById('theme-btn').addEventListener('click', () => {
-            const body = document.body;
-            const isDark = body.getAttribute('data-theme') === 'dark';
-            body.setAttribute('data-theme', isDark ? '' : 'dark');
-            document.getElementById('theme-btn').innerHTML = isDark ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
-        });
-
+        function checkout(method) { window.open(`https://wa.me/201033181443?text=طلب جديد: ${cart.map(i=>i.name).join(', ')}`); }
+        
+        document.getElementById('theme-btn').onclick = () => { document.body.dataset.theme = document.body.dataset.theme === 'dark' ? '' : 'dark'; };
+        
         renderAll();
     </script>
+  
 </body>
 </html>
